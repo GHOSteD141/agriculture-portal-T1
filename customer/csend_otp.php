@@ -28,9 +28,9 @@ function smtp_mailer($to,$subject, $msg){
 	$mail->Port = 465; 
 	$mail->IsHTML(true);
 	$mail->CharSet = 'UTF-8';
-	$mail->Username = "agricultureportal01@gmail.com";   
-    $mail->Password = "password"; 	
-    $mail->SetFrom("agricultureportal01@gmail.com");  
+	$mail->Username = "agricultureportal05@gmail.com";   
+    $mail->Password = "Agro@1234"; 	
+    $mail->SetFrom("agricultureportal05@gmail.com");  
 	$mail->Subject = $subject;
 	$mail->Body =$msg;
 	$mail->AddAddress($to);

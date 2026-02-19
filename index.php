@@ -400,7 +400,7 @@
 
 <script>
 
-const apiKey = "sk-xxxxxxxxxxxxxxxxxxx";   // Enter your apikey here
+const apiKey = "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";   // Enter your apikey here
 const chatbox = document.getElementById("quote");
 const authorN = document.getElementById("author");
 
