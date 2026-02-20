@@ -18,14 +18,18 @@ $temp=0;
     }
   }
   
-  $query2="SELECT Crop_quantity from farmer_crops_trade where Trade_crop='$crop'";
-  $result2 = mysqli_query($conn, $query2);
+  $stmt2 = $conn->prepare("SELECT Crop_quantity FROM farmer_crops_trade WHERE Trade_crop=?");
+  $stmt2->bind_param("s", $crop);
+  $stmt2->execute();
+  $result2 = $stmt2->get_result();
   while($row2 = $result2->fetch_assoc()) {
     $temp+=$row2["Crop_quantity"];
   }
   
-  $query8 = "SELECT quantity from cart where cropname='" . $crop . "'";
-$result8 = mysqli_query($conn, $query8);
+  $stmt8 = $conn->prepare("SELECT quantity FROM cart WHERE cropname=?");
+  $stmt8->bind_param("s", $crop);
+  $stmt8->execute();
+  $result8 = $stmt8->get_result();
 if (isset($result8) && $result8->num_rows > 0) {
     $row8 = $result8->fetch_assoc();
     $temp -= $row8['quantity'];
@@ -38,13 +42,17 @@ if (isset($result8) && $result8->num_rows > 0) {
 
   
   
-  $query="SELECT msp from farmer_crops_trade where Trade_crop='$crop'";
-  $result = mysqli_query($conn, $query);
+  $stmt = $conn->prepare("SELECT msp FROM farmer_crops_trade WHERE Trade_crop=?");
+  $stmt->bind_param("s", $crop);
+  $stmt->execute();
+  $result = $stmt->get_result();
   $row = $result->fetch_assoc();
   $x=$row["msp"]*$quantity;
   
-  $query3="SELECT trade_id from farmer_crops_trade where Trade_crop='$crop'";
-  $result3=mysqli_query($conn,$query3);
+  $stmt3 = $conn->prepare("SELECT trade_id FROM farmer_crops_trade WHERE Trade_crop=?");
+  $stmt3->bind_param("s", $crop);
+  $stmt3->execute();
+  $result3 = $stmt3->get_result();
   $row2 = $result3->fetch_assoc();
   $TradeId=$row2["trade_id"]; //trade id
   

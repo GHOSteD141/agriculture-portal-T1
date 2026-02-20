@@ -36,7 +36,11 @@ $query5 = "SELECT StateName from state where StCode ='$state'";
               $row5 = mysqli_fetch_assoc($ses_sq5);
               $statename = $row5['StateName'];
 			  
-    $updatequery1 = "UPDATE farmerlogin set  farmer_name='$name', email='$email', phone_no='$mobile',  F_gender='$gender',  F_birthday='$dob',  F_State='$statename', F_District='$district', F_Location='$city', password='$pass'  where farmer_id='$id'";mysqli_query($conn, $updatequery1);
+    // ✅ SECURE: Using prepared statements for UPDATE
+    $updatequery1 = $conn->prepare("UPDATE farmerlogin SET farmer_name=?, email=?, phone_no=?, F_gender=?, F_birthday=?, F_State=?, F_District=?, F_Location=?, password=? WHERE farmer_id=?");
+    $updatequery1->bind_param("sssssssssi", $name, $email, $mobile, $gender, $dob, $statename, $district, $city, $pass, $id);
+    $updatequery1->execute();
+    
   header("location: fprofile.php");
   }		  
 ?>

@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start(); // Starting Session
 $error = ''; // Variable To Store Error Message
 
@@ -7,13 +10,15 @@ require('../sql.php'); // Includes Login Script
 if(isset($_POST ['customerlogin'])) {
     $customer_email=$_POST['cust_email'];
     $customer_password=$_POST['cust_password'];
-  //$farmer_password=SHA1($farmer_password);
-
-
-    $checkquery = "SELECT * from `custlogin` where email='".$customer_email."' and password='".$customer_password."' ";
-  $result = mysqli_query($conn, $checkquery);
-  $rowcount=mysqli_num_rows($result);
-  if ($rowcount==true) {
+  
+    // ✅ SECURE: Using prepared statements
+    $stmt = $conn->prepare("SELECT * FROM custlogin WHERE email=? AND password=?");
+    $stmt->bind_param("ss", $customer_email, $customer_password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rowcount = $result->num_rows;
+    
+    if ($rowcount==true) {
     $_SESSION['customer_login_user']=$customer_email; // Initializing Session
 	
       $deletequery="DELETE FROM cart";

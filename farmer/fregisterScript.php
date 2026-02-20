@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 session_start(); // Starting Session
 
@@ -11,9 +13,11 @@ function is_valid_email($email)
 	global $conn;
 	global $error;
 	
-     $slquery = "SELECT farmer_id FROM farmerlogin WHERE email = '$email'";
-     $selectresult = mysqli_query($conn, $slquery);
-	 $rowcount=mysqli_num_rows($selectresult);
+     $stmt = $conn->prepare("SELECT farmer_id FROM farmerlogin WHERE email = ?");
+	 $stmt->bind_param("s", $email);
+	 $stmt->execute();
+     $selectresult = $stmt->get_result();
+	 $rowcount=$selectresult->num_rows;
 	   
 	 if ($rowcount==true) {
 		 
@@ -68,9 +72,9 @@ function create_user($name, $password, $email, $mobile, $gender, $dob, $statenam
 {
 	global $conn;
 	
-      $query = "INSERT INTO `farmerlogin` (farmer_name, password, email, phone_no, F_gender, F_birthday, F_State, F_District, F_Location) 
-	  VALUES ('$name', '$password', '$email', '$mobile', '$gender', '$dob', '$statename', '$district', '$city')";
-      $result = mysqli_query($conn, $query);
+      $stmt = $conn->prepare("INSERT INTO farmerlogin (farmer_name, password, email, phone_no, F_gender, F_birthday, F_State, F_District, F_Location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	  $stmt->bind_param("sssssssss", $name, $password, $email, $mobile, $gender, $dob, $statename, $district, $city);
+      $result = $stmt->execute();
       if($result){
           return true; // Success
       }else{
@@ -95,9 +99,11 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm
     $cpassword = $_POST['confirmpassword'];
 	
 	
-	$query5 = "SELECT StateName from state where StCode ='$state'";
-	$ses_sq5 = mysqli_query($conn, $query5);
-              $row5 = mysqli_fetch_assoc($ses_sq5);
+	$stmt5 = $conn->prepare("SELECT StateName FROM state WHERE StCode=?");
+	$stmt5->bind_param("s", $state);
+	$stmt5->execute();
+	$ses_sq5 = $stmt5->get_result();
+              $row5 = $ses_sq5->fetch_assoc();
               $statename = $row5['StateName'];
 
     if (is_valid_email($email) == true && is_valid_passwords($password,$cpassword) == true)

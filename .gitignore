@@ -83,8 +83,8 @@ Thumbs.db
 **/password*
 **/token*
 
-# Stripe and payment config files
-customer/stripePayment/config.php
+# Payment gateway config files
+customer/PaymentGateway/config.php
 
 # Mail configuration
 smtp/config.php

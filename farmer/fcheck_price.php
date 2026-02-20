@@ -6,8 +6,10 @@ $crops = $_POST['crops'];
 $x = 0.0;    
 $y = 0;
 
-$query = "SELECT costperkg FROM farmer_crops_trade WHERE Trade_crop='$crops'";
-$result = mysqli_query($conn, $query);
+$stmt = $conn->prepare("SELECT costperkg FROM farmer_crops_trade WHERE Trade_crop=?");
+$stmt->bind_param("s", $crops);
+$stmt->execute();
+$result = $stmt->get_result();
 
 while($row = $result->fetch_assoc()) {
 	$x = $x + $row["costperkg"];

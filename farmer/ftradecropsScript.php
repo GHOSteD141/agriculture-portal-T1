@@ -13,18 +13,22 @@ if(isset($_POST['Crop_submit'])){
     $costperkg=$_POST['trade_farmer_cost'];
 
     
-    $query1="SELECT farmer_id from farmerlogin where email='".$userlogin."';";
-    $run = mysqli_query($conn,$query1);
-    $row=mysqli_fetch_array($run);
+    $stmt1 = $conn->prepare("SELECT farmer_id FROM farmerlogin WHERE email=?");
+    $stmt1->bind_param("s", $userlogin);
+    $stmt1->execute();
+    $run = $stmt1->get_result();
+    $row=$run->fetch_array();
     $farmer_pid= $row[0];
     
-    $query2="INSERT INTO `farmer_crops_trade`(`farmer_fkid`, `Trade_crop`, `Crop_quantity`,`costperkg`) 
-    VALUES ($farmer_pid,'$trade_crop', $quantity, $costperkg);";
-    $result = mysqli_query($conn, $query2);
+    $stmt2 = $conn->prepare("INSERT INTO farmer_crops_trade(farmer_fkid, Trade_crop, Crop_quantity, costperkg) VALUES (?, ?, ?, ?)");
+    $stmt2->bind_param("isid", $farmer_pid, $trade_crop, $quantity, $costperkg);
+    $result = $stmt2->execute();
 
 
-    $query="SELECT costperkg from farmer_crops_trade where Trade_crop='$trade_crop'";
-    $result = mysqli_query($conn, $query);
+    $stmt = $conn->prepare("SELECT costperkg FROM farmer_crops_trade WHERE Trade_crop=?");
+    $stmt->bind_param("s", $trade_crop);
+    $stmt->execute();
+    $result = $stmt->get_result();
     while($row = $result->fetch_assoc()) {
         $x=$x+$row["costperkg"];
         $y++;
@@ -33,12 +37,14 @@ if(isset($_POST['Crop_submit'])){
     $x=CEIL($x/$y);
     $x=$x+CEIL($x*0.5);
 
-    $query3="UPDATE farmer_crops_trade SET msp='$x' where Trade_crop='$trade_crop'";
-    $result = mysqli_query($conn, $query3);
+    $stmt3 = $conn->prepare("UPDATE farmer_crops_trade SET msp=? WHERE Trade_crop=?");
+    $stmt3->bind_param("ds", $x, $trade_crop);
+    $stmt3->execute();
 
 
-    $query4= "UPDATE production_approx SET quantity=quantity+'$quantity' where crop='$trade_crop'";
-    $result = mysqli_query($conn, $query4);
+    $stmt4 = $conn->prepare("UPDATE production_approx SET quantity=quantity+? WHERE crop=?");
+    $stmt4->bind_param("is", $quantity, $trade_crop);
+    $stmt4->execute();
 
     	echo 
 "<script type='text/javascript'>alert('Crop Details Added Successfully');

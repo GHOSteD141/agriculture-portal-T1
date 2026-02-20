@@ -5,10 +5,8 @@ session_start();// Starting Session
 // Storing Session
 $user_check = $_SESSION['farmer_login_user'];
 // SQL Query To Fetch Complete Information Of User
-$query = "SELECT farmer_name from farmerlogin where email = '$user_check'";
-$ses_sql = mysqli_query($conn, $query);
-$row = mysqli_fetch_assoc($ses_sql);
-$login_session = $row['farmer_name'];
-$CustID=$user_check;
-?>
-
+$stmt = $conn->prepare("SELECT farmer_name FROM farmerlogin WHERE email = ?");
+$stmt->bind_param("s", $user_check);
+$stmt->execute();
+$ses_sql = $stmt->get_result();
+$row = $ses_sql->fetch_assoc();

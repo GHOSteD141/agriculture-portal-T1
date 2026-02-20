@@ -184,7 +184,7 @@ agriculture-portal-T1/
 │   ├── cregister.php
 │   ├── cbuy_crops.php
 │   ├── cstock_crop.php
-│   └── StripePayment/       # Payment integration
+	│   └── PaymentGateway/      # Payment integration
 │
 ├── db/
 │   └── agriculture_portal.sql  # Database schema

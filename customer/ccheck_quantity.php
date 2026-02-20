@@ -6,16 +6,20 @@ if (isset($_POST['crops'])) {
 
   $crop=$_POST['crops'];
   
-  $query2="SELECT quantity from production_approx where crop='$crop'";
-  $result2 = mysqli_query($conn, $query2);
+  $stmt2 = $conn->prepare("SELECT quantity FROM production_approx WHERE crop=?");
+  $stmt2->bind_param("s", $crop);
+  $stmt2->execute();
+  $result2 = $stmt2->get_result();
   while($row2 = $result2->fetch_assoc()) {
   $Cquantity=$row2["quantity"]; 
   }
   
-  $query3="SELECT trade_id from farmer_crops_trade where Trade_crop='$crop'";
-					  $result3=mysqli_query($conn,$query3);
-					  $row2 = $result3->fetch_assoc();
-					  $TradeId=$row2["trade_id"]; //trade id
+  $stmt3 = $conn->prepare("SELECT trade_id FROM farmer_crops_trade WHERE Trade_crop=?");
+  $stmt3->bind_param("s", $crop);
+  $stmt3->execute();
+  $result3 = $stmt3->get_result();
+  $row2 = $result3->fetch_assoc();
+  $TradeId=$row2["trade_id"]; //trade id
 					  
 					  
 $result = array(

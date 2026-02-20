@@ -209,34 +209,26 @@ $query4 = "SELECT * from custlogin where email='$user_check'";
 
 						<td>
 						
-			<?php
+		<?php
 
 						
-							require_once "StripePayment/config.php";
+							require_once "PaymentGateway/config.php";
 							
-								$TotalCartPrice=$_SESSION['Total_Cart_Price']*100;
+								$TotalCartPrice = $_SESSION['Total_Cart_Price'];
+								$orderId = uniqid('order_');
 								
-								$session = \Stripe\Checkout\Session::create([
-									'payment_method_types' => ['card'],
-									'line_items' => [[
-										'price_data' => [
-											'product' => 'prod_NdAYaoDLX3DnMY',
-											'unit_amount' => $TotalCartPrice,
-											'currency' => 'inr',
-										],
-										'quantity' => 1,
-									]],
-									'mode' => 'payment',
-									'success_url' => 'http://localhost/agriculture_portal/customer/cupdatedb.php',
-									'cancel_url' => 'http://localhost/agriculture_portal/customer/cbuy_crops.php',
-								]);
-
-												
-
     					?>
-						<button class="btn btn-info form-control" name="pay" type="submit" id="checkout-button">Pay</button>
-											
+					
+					<!-- Razorpay Payment Form -->
+					<form method="POST" action="process_razorpay.php" id="razorpayForm">
+						<input type="hidden" value="<?php echo $razorpayDetails['publicKey']; ?>" name="public_key"/>
+						<input type="hidden" value="<?php echo $TotalCartPrice * 100; ?>" name="amount"/>
+						<input type="hidden" value="INR" name="currency"/>
+						<input type="hidden" value="<?php echo $orderId; ?>" name="order_id"/>
+						<input type="hidden" value="<?php echo $_SESSION['customer_login_user']; ?>" name="email"/>
 						
+						<button type="submit" class="btn btn-info form-control" name="pay" id="checkout-button">Pay with Razorpay</button>
+					</form>
 						</td>
 					</tr>
 					<?php
@@ -258,31 +250,10 @@ $query4 = "SELECT * from custlogin where email='$user_check'";
             </div>
           </div>
         </div>
-		 
+	 
 </section>
 	   <?php require("footer.php");?>
 
-													<script src="https://js.stripe.com/v3/"></script>
-												<script>
-												const stripe = Stripe('<?php echo $stripeDetails['publishableKey']; ?>');
-
-												const checkoutButton = document.getElementById('checkout-button');
-
-												checkoutButton.addEventListener('click', () => {
-												  stripe.redirectToCheckout({
-													sessionId: '<?php echo $session->id; ?>'
-												  }).then(function (result) {
-													if (result.error) {
-													  alert(result.error.message);
-													}
-												  });
-												});
-												</script>
-												
-												
-<script>
-				$(document).ready( function () {
-    $('#myTable').DataTable();
 } );
 </script>
 

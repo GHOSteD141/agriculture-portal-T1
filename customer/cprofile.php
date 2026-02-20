@@ -4,9 +4,11 @@ ini_set('memory_limit', '-1');
 
 if(!isset($_SESSION['customer_login_user'])){
 header("location: ../index.php");} // Redirecting To Home Page
-$query4 = "SELECT * from custlogin where email='$user_check'";
-              $ses_sq4 = mysqli_query($conn, $query4);
-              $row4 = mysqli_fetch_assoc($ses_sq4);
+$stmt = $conn->prepare("SELECT * FROM custlogin WHERE email=?");
+$stmt->bind_param("s", $user_check);
+$stmt->execute();
+$ses_sq4 = $stmt->get_result();
+              $row4 = $ses_sq4->fetch_assoc();
               $para1 = $row4['cust_id'];
               $para2 = $row4['cust_name'];
               $para3 = $row4['password'];
@@ -30,12 +32,16 @@ if(isset($_POST['custupdate']))
 		$pincode = ($_POST['pincode']);
 		$pass = ($_POST['pass']);
 
-$query5 = "SELECT StateName from state where StCode ='$state'";
-	$ses_sq5 = mysqli_query($conn, $query5);
-              $row5 = mysqli_fetch_assoc($ses_sq5);
+$stmt5 = $conn->prepare("SELECT StateName FROM state WHERE StCode=?");
+$stmt5->bind_param("s", $state);
+$stmt5->execute();
+$ses_sq5 = $stmt5->get_result();
+              $row5 = $ses_sq5->fetch_assoc();
               $statename = $row5['StateName'];
 			  
-    $updatequery1 = "UPDATE custlogin set  cust_name='$name', email='$email', phone_no='$mobile',  state='$statename',  city='$city',  address='$address', pincode='$pincode', password='$pass'  where cust_id='$id'";mysqli_query($conn, $updatequery1);
+    $updatestmt = $conn->prepare("UPDATE custlogin SET cust_name=?, email=?, phone_no=?, state=?, city=?, address=?, pincode=?, password=? WHERE cust_id=?");
+	$updatestmt->bind_param("ssisssisi", $name, $email, $mobile, $statename, $city, $address, $pincode, $pass, $id);
+	$updatestmt->execute();
 	 header("location: cprofile.php");
   }			  
 ?>

@@ -11,8 +11,10 @@ if (isset($_POST["submit"])) {
     $user_message = $_POST['user_message'];
     $show_modal = false;
 
-    $query = "INSERT into contactus(c_name,c_mobile,c_email,c_address,c_message) VALUES('$user_name','$user_mobile','$user_email','$user_address','$user_message')";
-    $success = $conn->query($query);
+    $query = "INSERT into contactus(c_name,c_mobile,c_email,c_address,c_message) VALUES(?,?,?,?,?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssss", $user_name, $user_mobile, $user_email, $user_address, $user_message);
+    $success = $stmt->execute();
     if ($success) {
         echo "<script type='text/javascript'>
         $('#mysuccessModal').modal('show');

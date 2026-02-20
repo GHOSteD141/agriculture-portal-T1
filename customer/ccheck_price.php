@@ -7,8 +7,10 @@ if (isset($_POST['crops']) && isset($_POST['quantity'])) {
   $crop=$_POST['crops'];
   $quantity=$_POST['quantity'];
   
- $query="SELECT msp from farmer_crops_trade where Trade_crop='$crop'";
-  $result = mysqli_query($conn, $query);
+  $stmt = $conn->prepare("SELECT msp FROM farmer_crops_trade WHERE Trade_crop=?");
+  $stmt->bind_param("s", $crop);
+  $stmt->execute();
+  $result = $stmt->get_result();
   $row = $result->fetch_assoc();
   $x=$row["msp"]*$quantity;
   
