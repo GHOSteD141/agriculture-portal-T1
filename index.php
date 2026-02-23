@@ -4,150 +4,98 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/png" href="assets/img/logo.png" />
-    <title>Agriculture Portal</title>
+  <title>Agriculture Portal - Modern Farming Solutions</title>
 
-  <!--     Fonts and icons     -->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
-	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-	
-	<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css "/>
-	
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
   
-  <!-- Nucleo Icons -->
-  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-
- 
-  <link rel="stylesheet" href="assets/css/creativetim.min.css" type="text/css">
-
+  <!-- Modern Glassmorphism CSS -->
+  <link rel="stylesheet" href="assets/css/modern-glassmorphism.css" type="text/css">
 </head>
 
-  <body class="bg-white" id="top" onload="myFunction()">
-    <!-- Navbar -->
-    <nav
-      id="navbar-main"
-      class="
-        navbar navbar-main navbar-expand-lg
-        bg-default
-        navbar-light
-        position-sticky
-        top-0
-        shadow
-        py-0
-      "
-    >
-      <div class="container">
-        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-          <li class="nav-item dropdown">
-            <a href="index.php" class="navbar-brand mr-lg-5 text-white">
-                               <img src="assets/img/nav.png" />
+<body class="bg-white" id="top">
+  <!-- Modern Navigation -->
+  <nav class="navbar navbar-main navbar-expand-lg navbar-light position-sticky top-0 py-0" style="z-index: 1000;">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">
+        <i class="fas fa-leaf"></i> AgriPortal
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php">
+              <i class="fas fa-envelope"></i> Contact
             </a>
           </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="farmer/fregister.php">🌾 Farmer</a>
+              <a class="dropdown-item" href="customer/cregister.php">🛒 Customer</a>
+            </div>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="farmer/flogin.php">🌾 Farmer</a>
+              <a class="dropdown-item" href="customer/clogin.php">🛒 Customer</a>
+              <a class="dropdown-item" href="admin/alogin.php">⚙️ Admin</a>
+            </div>
+          </li>
         </ul>
+      </div>
+    </div>
+  </nav>
 
-        <button
-          class="navbar-toggler bg-white"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbar_global"
-          aria-controls="navbar_global"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon text-white"></span>
-        </button>
-        <div class="navbar-collapse collapse bg-default" id="navbar_global">
-          <div class="navbar-collapse-header">
-            <div class="row">
-              <div class="col-10 collapse-brand">
-                <a href="index.html">
-                  <img src="assets/img/nav.png" />
-                </a>
-              </div>
-              <div class="col-2 collapse-close bg-danger">
-                <button
-                  type="button"
-                  class="navbar-toggler"
-                  data-toggle="collapse"
-                  data-target="#navbar_global"
-                  aria-controls="navbar_global"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span></span>
-                  <span></span>
-                </button>
-              </div>
+  <!-- Hero Section -->
+  <div class="container">
+    <div class="hero mt-4" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.6), rgba(5, 150, 105, 0.4)), 
+                                                     linear-gradient(to right, rgba(52, 211, 153, 0.3), transparent);">
+      <div class="hero-content">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <span class="badge mb-3">Welcome to Modern Agriculture</span>
+            <h1 class="display-3" style="font-weight: 800; color: white; margin-bottom: 1.5rem;">
+              🌾 Your True Farmer's Friend
+            </h1>
+            <p class="lead" style="color: rgba(255, 255, 255, 0.95); line-height: 1.8; margin-bottom: 2rem;">
+              Connect farmers and customers directly. Trade crops, get predictions, and grow your business with cutting-edge agricultural technology.
+            </p>
+            <div>
+              <a href="farmer/fregister.php" class="btn btn-primary btn-lg mr-3">
+                Get Started as Farmer
+              </a>
+              <a href="customer/cregister.php" class="btn btn-outline-primary btn-lg" style="border-color: white; color: white;">
+                Browse as Customer
+              </a>
             </div>
           </div>
-
-          <ul class="navbar-nav align-items-lg-center ml-auto">
-		  
-		   <li class="nav-item">
-              <a href="contact.php" class="nav-link">
-                <span class="text-white nav-link-inner--text"
-                  ><i class="text-white fas fa-address-card"></i> Contact</span
-                >
-              </a>
-            </li>
-			
-			
-			  <li class="nav-item">
-			   <div class="dropdown show ">
-		  <a class="nav-link dropdown-toggle text-white " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                  <span class="text-white nav-link-inner--text"
-                  ><i class="text-white fas fa-user-plus"></i> Sign Up</span
-                >
-		  </a>
-
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item" href="farmer/fregister.php">Farmer</a>
-			<a class="dropdown-item" href="customer/cregister.php">Customer</a>
-		  </div>
-		</div>
-			</li>
-			
-		  
-				  <li class="nav-item">
-			   <div class="dropdown show ">
-		  <a class="nav-link dropdown-toggle text-white " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                  <span class="text-white nav-link-inner--text"
-                  ><i class="text-white fas fa-sign-in-alt"></i> Login</span
-                >
-		  </a>
-
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item" href="farmer/flogin.php">Farmer</a>
-			<a class="dropdown-item" href="customer/clogin.php">Customer</a>
-			<a class="dropdown-item" href="admin/alogin.php">Admin </a>
-		  </div>
-		</div>
-			</li>
-			
-          
-          </ul>
+          <div class="col-lg-6 text-center" style="display: flex; align-items: center; justify-content: center;">
+            <div style="font-size: 5rem; animation: float 3s ease-in-out infinite;">🌱</div>
+          </div>
         </div>
       </div>
-    </nav>
-    <!-- End Navbar -->
-
-<div class="wrapper" >
-
-    <div class="wrapper">
-      <header class="jumbotron bg-gradient-warning">
-        <div class="container">
-          <div class="row row-header">
-            <div class="col-12 col-sm-6">
-              <h1 class="text-white">Agriculture Portal</h1>
-              <p class="text-white">
-               A True Farmer's Friend.
-              </p>
+    </div>
+  </div>
               <div class="cg">
                 <div class="card card-body bg-gradient-success">
                   <blockquote cite="blockquote">
@@ -223,8 +171,27 @@
               </div>
             </div>
       
-          </div>
-   </div>
+      <div class="grid grid-3 mt-4">
+        <!-- Feature 4: Real-time Weather -->
+        <div class="feature-box">
+          <div class="feature-icon">⛅</div>
+          <h3>Weather Forecast</h3>
+          <p>Real-time weather updates and forecasts. Plan your farming activities with accurate weather data and seasonal predictions.</p>
+        </div>
+        
+        <!-- Feature 5: News & Updates -->
+        <div class="feature-box">
+          <div class="feature-icon">📰</div>
+          <h3>Agriculture News</h3>
+          <p>Stay updated with the latest agricultural news, market trends, and industry insights. Never miss important information affecting your business.</p>
+        </div>
+        
+        <!-- Feature 6: Direct Trading -->
+        <div class="feature-box">
+          <div class="feature-icon">📊</div>
+          <h3>Direct Trading</h3>
+          <p>Trade crops directly between farmers and customers. Transparent pricing, secure transactions, and fair deals for everyone.</p>
+        </div>
       </div>
     </div>
 
@@ -396,6 +363,26 @@
         </div>
     </div>
 
+  <!-- Quote/Testimonials Section -->
+  <div class="section" style="padding: 4rem 0; background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05));">
+    <div class="container">
+      <h2 class="section-title">Wisdom from Farmers</h2>
+      
+      <div class="card" style="max-width: 800px; margin: 2rem auto; text-align: center; padding: 3rem;">
+        <div style="font-size: 3rem; color: var(--primary-green); margin-bottom: 1rem;">💭</div>
+        <blockquote style="font-size: 1.25rem; font-style: italic; color: var(--dark-text); line-height: 1.8; margin-bottom: 1.5rem;">
+          <p id="quote">"Farming looks mighty easy when your plow is a pencil, and you're a thousand miles from the corn field."</p>
+        </blockquote>
+        <footer style="color: var(--primary-green); font-weight: 600; font-size: 1.1rem;">
+          <span id="author">— Dwight D. Eisenhower</span>
+        </footer>
+        <button class="btn btn-primary mt-4" onclick="myFunction()" style="margin: 0 auto;">
+          <i class="fas fa-lightbulb"></i> Get New Quote
+        </button>
+      </div>
+    </div>
+  </div>
+
 <?php require("footer.php");?>
 
 <?php require_once(__DIR__ . '/env_config.php'); ?>
@@ -463,6 +450,8 @@ function fetchMessages() {
     }
 }
  </script>
+
+<?php include 'footer.php'; ?>
 
 </body>
 
