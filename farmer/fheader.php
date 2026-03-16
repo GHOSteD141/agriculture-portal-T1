@@ -24,6 +24,11 @@
   <!-- Creative Tim CSS (for backward compatibility) -->
   <link rel="stylesheet" href="../assets/css/creativetim.min.css" type="text/css">
 
+  <!-- ✅ jQuery MUST load before any script that uses $ -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+
   <script src="../assets/js/state_district_crops_dropdown.js"></script>
 
   <!-- Environment-based API Configuration -->

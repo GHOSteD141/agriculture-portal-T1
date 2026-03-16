@@ -1,4 +1,4 @@
-    <nav
+<nav
       id="navbar-main"
       class="
         navbar navbar-main navbar-expand-lg
@@ -57,8 +57,6 @@
 
           <ul class="navbar-nav align-items-lg-center ml-auto topnav" id="nav">
 		  
-		  	 
-		  
 	 <li class="nav-item" id="prediction">
 			   <div class="dropdown show ">
 		  <a class="nav-link dropdown-toggle text-white " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,8 +73,6 @@
 		</div>
 			</li>
 			
-			
-			
 			 <li class="nav-item" id="recommendation">
 			   <div class="dropdown show ">
 		  <a class="nav-link dropdown-toggle text-white " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,7 +87,6 @@
 		  </div>
 		</div>
 			</li>
-			
 
 		  
 			 <li class="nav-item" id="trade">
@@ -109,11 +104,8 @@
 		  </div>
 		</div>
 			</li>
-			
 
-			 
-			
-						 <li class="nav-item " id="tools">
+			 <li class="nav-item " id="tools">
 			   <div class="dropdown show ">
 		  <a class="nav-link dropdown-toggle text-white " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                  <span class="text-white nav-link-inner--text"
@@ -129,8 +121,6 @@
 		</div>
 			</li>
 			
-		
-		
 		   <li class="nav-item" id="profile">
               <a href="fprofile.php" class="nav-link">
                 <span class="text-white nav-link-inner--text font-weight-bold"
@@ -139,8 +129,6 @@
               </a>
             </li>
 			
-			
-		  
 		   <li class="nav-item">
               <a href="flogout.php" class="nav-link">
                 <span class="text-white nav-link-inner--text font-weight-bold"
@@ -149,15 +137,11 @@
               </a>
             </li>
 
-
-
           </ul>
         </div>
       </div>
     </nav>
 	
-	
-
 <style>
 .topnav a {
   border-bottom: 3px solid transparent;
@@ -170,13 +154,15 @@
 .topnav a.activa {
   border-bottom: 3px solid red;
 }
-
 </style>	
 	
   <script>
-$("#nav li a").each(function() {   
-    if (this.href == window.location.href) {
+  // ✅ Wrapped in $(document).ready() so $ is guaranteed to exist
+  $(document).ready(function() {
+    $("#nav li a").each(function() {
+      if (this.href == window.location.href) {
         $(this).addClass("activaa");
-    }
-});
+      }
+    });
+  });
   </script>
