@@ -48,9 +48,10 @@ if ($generated_signature === $razorpay_signature) {
         $total_amount = $_SESSION['Total_Cart_Price'] ?? 0;
         
         foreach($_SESSION["shopping_cart"] as $keys => $values) {
-            $crop_name = $values["crop_name"];
-            $quantity = $values["crop_quantity"];
-            $price = $values["crop_price"];
+            // FIXED: Using "item_" instead of "crop_" to match the session variables perfectly
+            $crop_name = $values["item_name"];
+            $quantity = $values["item_quantity"];
+            $price = $values["item_price"];
             
             // Insert order details into database
             $insert_query = "INSERT INTO orders (cust_id, crop_name, quantity, price, payment_id, order_status, order_date) 

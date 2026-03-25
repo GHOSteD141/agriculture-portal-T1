@@ -36,9 +36,6 @@ $query4 = "SELECT * from custlogin where email='$user_check'";
       <span></span>
       <span></span>
     </div>
-<!-- ======================================================================================================================================== -->
-
-
 <div class="container ">
     
     	 <div class="row">
@@ -212,16 +209,15 @@ $query4 = "SELECT * from custlogin where email='$user_check'";
 		<?php
 
 						
-							require_once "PaymentGateway/config.php";
+							require_once "../env_config.php";
 							
 								$TotalCartPrice = $_SESSION['Total_Cart_Price'];
 								$orderId = uniqid('order_');
 								
     					?>
 					
-					<!-- Razorpay Payment Form -->
 					<form method="POST" action="process_razorpay.php" id="razorpayForm">
-						<input type="hidden" value="<?php echo $razorpayDetails['publicKey']; ?>" name="public_key"/>
+						<input type="hidden" value="<?php echo getenv('RAZORPAY_PUBLIC_KEY'); ?>" name="public_key"/>
 						<input type="hidden" value="<?php echo $TotalCartPrice * 100; ?>" name="amount"/>
 						<input type="hidden" value="INR" name="currency"/>
 						<input type="hidden" value="<?php echo $orderId; ?>" name="order_id"/>
@@ -254,8 +250,6 @@ $query4 = "SELECT * from custlogin where email='$user_check'";
 </section>
 	   <?php require("footer.php");?>
 
-} );
-</script>
 
 						
 <script> 
@@ -330,5 +324,4 @@ quantityInput.addEventListener("change", () => {
 </script>
 	
 </body>
-</html>						
-           
+</html>
